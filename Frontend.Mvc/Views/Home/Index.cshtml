@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Frontend.Mvc.Models.Session>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,27 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table>
+    <caption>.Net Conf 2021 Sessions</caption>
+    <thead>
+        <tr>
+            <th scope="col">Speaker</th>
+            <th scope="col">Title</th>
+            <th scope="col">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var session in Model)
+            {
+                <tr>
+                    <td>@session.Speaker</td>
+                    <td>@session.Title</td>
+                    <td>@session.Duration</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

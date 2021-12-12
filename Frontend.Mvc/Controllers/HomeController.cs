@@ -15,7 +15,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var sessions = new Session[]{
+            new(){ Title = "Awesome Blazor", Speaker = "John Galloway", Duration = "30 mins" },
+            new(){ Title = "C# 10", Speaker = "Mads", Duration = "45 mins" },
+            new(){ Title = "Real-world minimal API's", Speaker = "Shawn Wildermuth", Duration = "30 mins" }
+        };
+        return View(sessions);
     }
 
     public IActionResult Privacy()
