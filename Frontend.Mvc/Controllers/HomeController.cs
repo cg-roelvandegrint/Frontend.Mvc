@@ -13,13 +13,15 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var sessions = new Session[]{
-            new(){ Title = "Awesome Blazor", Speaker = "John Galloway", Duration = "30 mins" },
-            new(){ Title = "C# 10", Speaker = "Mads", Duration = "45 mins" },
-            new(){ Title = "Real-world minimal API's", Speaker = "Shawn Wildermuth", Duration = "30 mins" }
+        HttpClient httpClient = new()
+        {
+            BaseAddress = new Uri("https://cont-sessions-service.niceglacier-0de66fcf.northeurope.azurecontainerapps.io")
         };
+
+        var sessions = await httpClient.GetFromJsonAsync<IEnumerable<Session>>("sessions");
+
         return View(sessions);
     }
 
